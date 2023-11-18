@@ -12,7 +12,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var calculatorStack: UILabel!
     @IBOutlet weak var result: UILabel!
     var calculations: String = ""
-    
+    var operators: [Character] = ["+", "-", "x", "/", "(", ")", "."]
     
     
     override func viewDidLoad() {
@@ -30,28 +30,62 @@ class ViewController: UIViewController {
         clearInput()
     }
     
+    @IBAction func deleteLastElement(_ sender: Any) {
+        calculations = String(calculations.dropLast())
+        calculatorStack.text = calculations
+    }
+    
     func addToCalculatiorStack(number: String){
         calculations = calculations + number
         calculatorStack.text = calculations
     }
     
-    
-    
     @IBAction func add(_ sender: Any) {
-        addToCalculatiorStack(number: "+")
-    }
-    
-    
-    @IBAction func equals(_ sender: Any) {
-        let tempResult = NSExpression(format: calculations).expressionValue(with: nil, context: nil) as! Double
-        
-        if floor(tempResult) == tempResult {
-            result.text = String(format: "%.0f", tempResult)
-        } else {
-            result.text = String(format: "%.2f", tempResult)
+        if !operators.contains(calculations.last!) {
+            addToCalculatiorStack(number: "+")
         }
     }
     
+    @IBAction func substract(_ sender: Any) {
+        if !operators.contains(calculations.last!) {
+            addToCalculatiorStack(number: "-")
+        }
+    }
+    
+    @IBAction func multiple(_ sender: Any) {
+        if !operators.contains(calculations.last!) {
+            addToCalculatiorStack(number: "*")
+        }
+    }
+    
+    @IBAction func divide(_ sender: Any) {
+        if !operators.contains(calculations.last!) {
+            addToCalculatiorStack(number: "/")
+        }
+    }
+    
+    @IBAction func equals(_ sender: Any) {
+        if !operators.contains(calculations.last!) {
+            let tempResult = NSExpression(format: calculations).expressionValue(with: nil, context: nil) as! Double
+            
+            print(floor(tempResult))
+            print(tempResult)
+            
+            if floor(tempResult) == tempResult {
+                result.text = String(format: "%.0f", tempResult)
+                print("tutaj")
+            } else {
+                print("here")
+                result.text = String(format: "%.2f", tempResult)
+            }
+        }
+    }
+    
+    @IBAction func dot(_ sender: Any) {
+        if calculations.last!.isNumber {
+            addToCalculatiorStack(number: ".")
+        }
+    }
     
     @IBAction func zero(_ sender: Any) {
         addToCalculatiorStack(number: "0")
@@ -60,7 +94,6 @@ class ViewController: UIViewController {
     @IBAction func one(_ sender: Any) {
         addToCalculatiorStack(number: "1")
     }
-    
     
     @IBAction func two(_ sender: Any) {
         addToCalculatiorStack(number: "2")
@@ -93,6 +126,4 @@ class ViewController: UIViewController {
     @IBAction func nine(_ sender: Any) {
         addToCalculatiorStack(number: "9")
     }
-    
-    
 }
