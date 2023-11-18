@@ -43,8 +43,13 @@ class ViewController: UIViewController {
     
     
     @IBAction func equals(_ sender: Any) {
-        var tempResult = NSExpression(format: calculations).expressionValue(with: nil, context: nil) as! Double
-        result = tempResult
+        let tempResult = NSExpression(format: calculations).expressionValue(with: nil, context: nil) as! Double
+        
+        if floor(tempResult) == tempResult {
+            result.text = String(format: "%.0f", tempResult)
+        } else {
+            result.text = String(format: "%.2f", tempResult)
+        }
     }
     
     
