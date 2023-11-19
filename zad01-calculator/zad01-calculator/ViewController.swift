@@ -47,15 +47,6 @@ class ViewController: UIViewController {
             equalsClicked = false
         }
         
-//        if operators.contains(element) {
-//            if equalsClicked {
-//                calculations = result.text!
-//                calculatorStack.text = calculations
-//                result.text = ""
-//                equalsClicked = false
-//            }
-//        }
-        
         calculations = calculations + element
         calculatorStack.text = calculations
     }
