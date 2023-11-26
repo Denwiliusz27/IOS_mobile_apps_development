@@ -67,7 +67,7 @@ struct ContentView: View {
                     .padding(15)
                     .swipeActions(edge: .leading) {
                         Button(role: .destructive) {
-                            taskList.removeAll { $0.id == index }
+                            taskList.remove(at: index)
                             print("Delete item")
                         } label: {
                             Label("Delete", systemImage: "trash")
