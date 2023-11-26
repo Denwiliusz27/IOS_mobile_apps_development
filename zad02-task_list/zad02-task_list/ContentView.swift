@@ -16,7 +16,7 @@ struct ContentView: View {
         var image: String
     }
     
-    let taskList: [Task] = [
+    @State var taskList: [Task] = [
         Task(name: "buy ziemniaki", priority: "High", description: "Buy some potatoes for dinner", image: "potatoes"),
         Task(name: "walk a dog", priority: "Low", description: "Burek needs to go outside", image: "dog"),
         Task(name: "do task for IOS", priority: "High", description: "It won't take longer than 15 min", image: "ios")
@@ -37,14 +37,24 @@ struct ContentView: View {
                     NavigationLink {
                         TaskView(name: task.name, description: task.description, image: task.image)
                     } label:{
-                        Text(task.name)
-                        Text(task.priority)
+                        HStack{
+                            Text(task.name)
+                            Spacer()
+                            Text(task.priority)
+                        }
+                    }
+                    .padding(15)
+                    .swipeActions(edge: .leading) {
+                        Button(role: .destructive) {
+                            taskList.removeAll { $0.id == task.id }
+                            print("Delete item")
+                        } label: {
+                            Label("Delete", systemImage: "trash")
+                        }
                     }
                 }
             }
         }
-        
-
     }
 }
 

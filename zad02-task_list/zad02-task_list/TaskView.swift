@@ -13,7 +13,9 @@ struct TaskView: View {
     let image: String
     
     var body: some View {
-        Text("Selected task: \(name)")
+        Text("Task: \(name)")
+            .fontWeight(.bold)
+            .padding(20)
         Text("Description: \(description)")
         Image(image)
             .resizable()
