@@ -11,6 +11,7 @@ struct TaskView: View {
     let name: String
     let description: String
     let image: String
+
     
     var body: some View {
         Text("Task: \(name)")

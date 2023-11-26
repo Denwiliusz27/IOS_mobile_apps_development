@@ -9,23 +9,22 @@ import SwiftUI
 
 struct ContentView: View {
     struct Task: Identifiable {
-        let id = UUID()
+        let id = Int()
         var name: String
-        var priority: String
         var description: String
         var image: String
+        var status: String
     }
     
     @State var taskList: [Task] = [
-        Task(name: "buy ziemniaki", priority: "High", description: "Buy some potatoes for dinner", image: "potatoes"),
-        Task(name: "walk a dog", priority: "Low", description: "Burek needs to go outside", image: "dog"),
-        Task(name: "do task for IOS", priority: "High", description: "It won't take longer than 15 min", image: "ios")
+        Task(name: "buy ziemniaki", description: "Buy some potatoes for dinner", image: "potatoes", status: "To do"),
+        Task(name: "walk a dog", description: "Burek needs to go outside", image: "dog", status: "Done"),
+        Task(name: "do task for IOS", description: "It won't take longer than 15 min", image: "ios", status: "In progress")
     ]
     
     
-    
     var body: some View {
-        Text("Task list")
+        Text("Tasks list")
             .fontWeight(.bold)
             .font(.title)
             .foregroundStyle(Color.red)
@@ -33,20 +32,42 @@ struct ContentView: View {
         
         NavigationStack{
             List {
-                ForEach(taskList) { task in
+                ForEach(taskList.indices, id: \.self) { index in
                     NavigationLink {
-                        TaskView(name: task.name, description: task.description, image: task.image)
+                        TaskView(name: taskList[index].name, description: taskList[index].description, image: taskList[index].image)
                     } label:{
                         HStack{
-                            Text(task.name)
+                            Text(taskList[index].name)
                             Spacer()
-                            Text(task.priority)
+                            
+                            Menu{
+                                Button(action: {
+                                    taskList[index].status = "To do"
+                                }, label: {
+                                    Text("To do")
+                                })
+                                Button(action: {
+                                    taskList[index].status = "In Progress"
+                                }, label: {
+                                    Text("In progress")
+                                })
+                                Button(action: {
+                                    taskList[index].status = "Done"
+                                }, label: {
+                                    Text("Done")
+                                })
+                            } label: {
+                                Label(
+                                    title: { Text(taskList[index].status) },
+                                    icon: {  }
+                                )
+                            }
                         }
                     }
                     .padding(15)
                     .swipeActions(edge: .leading) {
                         Button(role: .destructive) {
-                            taskList.removeAll { $0.id == task.id }
+                            taskList.removeAll { $0.id == index }
                             print("Delete item")
                         } label: {
                             Label("Delete", systemImage: "trash")
