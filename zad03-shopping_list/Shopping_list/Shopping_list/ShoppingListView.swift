@@ -21,9 +21,13 @@ struct ShoppingListView: View {
             List {
                 ForEach(products) { product in
                     NavigationLink {
-                        Text("Product at \(product.name!)")
+                        ItemView(name: product.name!, details: product.details!, amount: product.amount)
                     } label: {
-                        Text(product.name!)
+                        HStack{
+                            Text(product.name!)
+                            Spacer()
+                            Text((product.category?.name)!)
+                        }
                     }
                 }
                 .onDelete(perform: deleteItems)
@@ -32,13 +36,9 @@ struct ShoppingListView: View {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     EditButton()
                 }
-                ToolbarItem {
-                    Button(action: addItem) {
-                        Label("Add Item", systemImage: "plus")
-                    }
-                }
             }
-            Text("Select an item")
+            Text("Shopping list")
+                .fontWeight(.bold)
         }
     }
 
@@ -50,8 +50,6 @@ struct ShoppingListView: View {
             do {
                 try viewContext.save()
             } catch {
-                // Replace this implementation with code to handle the error appropriately.
-                // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
                 let nsError = error as NSError
                 fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
             }

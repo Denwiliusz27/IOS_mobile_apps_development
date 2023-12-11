@@ -13,6 +13,7 @@
 		3526C3E12B21E3A1008C6F82 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3526C3E02B21E3A1008C6F82 /* Preview Assets.xcassets */; };
 		3526C3E32B21E3A1008C6F82 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3526C3E22B21E3A1008C6F82 /* Persistence.swift */; };
 		3526C3E62B21E3A1008C6F82 /* Shopping_list.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3526C3E42B21E3A1008C6F82 /* Shopping_list.xcdatamodeld */; };
+		35E6F40C2B279BED00E4B8FE /* ItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E6F40B2B279BED00E4B8FE /* ItemView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -23,6 +24,7 @@
 		3526C3E02B21E3A1008C6F82 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		3526C3E22B21E3A1008C6F82 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
 		3526C3E52B21E3A1008C6F82 /* Shopping_list.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Shopping_list.xcdatamodel; sourceTree = "<group>"; };
+		35E6F40B2B279BED00E4B8FE /* ItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,6 +57,7 @@
 		3526C3D82B21E3A0008C6F82 /* Shopping_list */ = {
 			isa = PBXGroup;
 			children = (
+				35E6F40B2B279BED00E4B8FE /* ItemView.swift */,
 				3526C3D92B21E3A0008C6F82 /* Shopping_listApp.swift */,
 				3526C3DB2B21E3A0008C6F82 /* ShoppingListView.swift */,
 				3526C3DD2B21E3A1008C6F82 /* Assets.xcassets */,
@@ -146,6 +149,7 @@
 				3526C3E32B21E3A1008C6F82 /* Persistence.swift in Sources */,
 				3526C3E62B21E3A1008C6F82 /* Shopping_list.xcdatamodeld in Sources */,
 				3526C3DC2B21E3A0008C6F82 /* ShoppingListView.swift in Sources */,
+				35E6F40C2B279BED00E4B8FE /* ItemView.swift in Sources */,
 				3526C3DA2B21E3A0008C6F82 /* Shopping_listApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
