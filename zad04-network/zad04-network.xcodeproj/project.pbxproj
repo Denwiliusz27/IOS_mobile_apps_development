@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		35160AA62B3448760082069E /* ProductsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35160AA52B3448760082069E /* ProductsView.swift */; };
 		359D781D2B2B1E6700ABBE4D /* zad04_networkApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 359D781C2B2B1E6700ABBE4D /* zad04_networkApp.swift */; };
 		359D781F2B2B1E6700ABBE4D /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 359D781E2B2B1E6700ABBE4D /* ContentView.swift */; };
 		359D78212B2B1E6800ABBE4D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 359D78202B2B1E6800ABBE4D /* Assets.xcassets */; };
@@ -16,6 +17,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		35160AA52B3448760082069E /* ProductsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductsView.swift; sourceTree = "<group>"; };
 		359D78192B2B1E6700ABBE4D /* zad04-network.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "zad04-network.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		359D781C2B2B1E6700ABBE4D /* zad04_networkApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = zad04_networkApp.swift; sourceTree = "<group>"; };
 		359D781E2B2B1E6700ABBE4D /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -55,6 +57,7 @@
 		359D781B2B2B1E6700ABBE4D /* zad04-network */ = {
 			isa = PBXGroup;
 			children = (
+				35160AA52B3448760082069E /* ProductsView.swift */,
 				359D781C2B2B1E6700ABBE4D /* zad04_networkApp.swift */,
 				359D781E2B2B1E6700ABBE4D /* ContentView.swift */,
 				359D78202B2B1E6800ABBE4D /* Assets.xcassets */,
@@ -147,6 +150,7 @@
 				359D781F2B2B1E6700ABBE4D /* ContentView.swift in Sources */,
 				359D78292B2B1E6800ABBE4D /* zad04_network.xcdatamodeld in Sources */,
 				359D781D2B2B1E6700ABBE4D /* zad04_networkApp.swift in Sources */,
+				35160AA62B3448760082069E /* ProductsView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

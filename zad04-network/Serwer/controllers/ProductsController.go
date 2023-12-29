@@ -7,19 +7,20 @@ import (
 )
 
 type Product struct {
-	ID         int    `json:"id"`
-	Name       string `json:"name"`
-	CategoryId int    `json:"categoryId"`
+	ID         int     `json:"id"`
+	Name       string  `json:"name"`
+	CategoryId int     `json:"categoryId"`
+	Price      float32 `json:"price"`
 }
 
 var products = []Product{
-	{ID: 1, Name: "Potatoes", CategoryId: 1},
-	{ID: 2, Name: "Apple", CategoryId: 2},
-	{ID: 3, Name: "Pepsi", CategoryId: 4},
-	{ID: 4, Name: "Village bread", CategoryId: 5},
-	{ID: 5, Name: "Tomatoes", CategoryId: 1},
-	{ID: 6, Name: "Milk", CategoryId: 3},
-	{ID: 7, Name: "Banana", CategoryId: 2},
+	{ID: 1, Name: "Potatoes", CategoryId: 1, Price: 2.99},
+	{ID: 2, Name: "Apple", CategoryId: 2, Price: 1.99},
+	{ID: 3, Name: "Pepsi", CategoryId: 4, Price: 5.49},
+	{ID: 4, Name: "Village bread", CategoryId: 5, Price: 4.00},
+	{ID: 5, Name: "Tomatoes", CategoryId: 1, Price: 6.99},
+	{ID: 6, Name: "Milk", CategoryId: 3, Price: 2.99},
+	{ID: 7, Name: "Banana", CategoryId: 2, Price: 4.50},
 }
 
 type ProductsController struct{}

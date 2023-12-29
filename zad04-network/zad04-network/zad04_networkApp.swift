@@ -8,6 +8,8 @@
 import SwiftUI
 import CoreData
 
+let basicServerUrl = "https://0dcd-2a01-11af-43e-7300-ed30-face-2c34-6331.ngrok-free.app"
+
 @main
 struct zad04_networkApp: App {
     let persistenceController = PersistenceController.shared
@@ -15,6 +17,7 @@ struct zad04_networkApp: App {
     init() {
         loadCategories()
         loadProducts()
+        loadOrders()
     }
     
     var body: some Scene {
@@ -28,7 +31,7 @@ struct zad04_networkApp: App {
 extension zad04_networkApp {
     func loadCategories() {
         let context = persistenceController.container.viewContext
-        let serverUrl = "https://f010-2a02-a31a-e045-4880-d5d2-d149-1cf7-f275.ngrok-free.app/categories"
+        let serverUrl = basicServerUrl + "/categories"
         
         let url = URL(string: serverUrl)
         let request = URLRequest(url: url!)
@@ -41,7 +44,7 @@ extension zad04_networkApp {
         
         let task = session.dataTask(with: request, completionHandler: { (data, response, error) in
             guard error == nil else {
-                print("Error requesting data from server")
+                print("Error requesting data from server for category")
                 return
             }
 
@@ -86,7 +89,7 @@ extension zad04_networkApp {
     
     func loadProducts() {
         let context = persistenceController.container.viewContext
-        let serverUrl = "https://f010-2a02-a31a-e045-4880-d5d2-d149-1cf7-f275.ngrok-free.app/products"
+        let serverUrl = basicServerUrl + "/products"
         
         let url = URL(string: serverUrl)
         let request = URLRequest(url: url!)
@@ -99,7 +102,7 @@ extension zad04_networkApp {
         
         let task = session.dataTask(with: request, completionHandler: { (data, response, error) in
             guard error == nil else {
-                print("Error requesting data from server")
+                print("Error requesting data from server for products")
                 return
             }
 
@@ -144,6 +147,70 @@ extension zad04_networkApp {
         dispathGroup.wait()
     }
     
+    func loadOrders() {
+        let context = persistenceController.container.viewContext
+        let serverUrl = basicServerUrl + "/orders"
+        
+        let url = URL(string: serverUrl)
+        let request = URLRequest(url: url!)
+        
+        let config = URLSessionConfiguration.default
+        let session = URLSession(configuration: config)
+        
+        let orderEntity = NSEntityDescription.entity(forEntityName: "Order", in: context)
+        let dispathGroup = DispatchGroup()
+        
+        let task = session.dataTask(with: request, completionHandler: { (data, response, error) in
+            guard error == nil else {
+                print("Error requesting data from server for orders")
+                return
+            }
+
+            guard data != nil else {
+                print("No orders")
+                return
+            }
+            
+            do {
+                let json = try JSONSerialization.jsonObject(with: data!, options: [])
+                if let object = json as? [String : Any] {
+                    print(object)
+                } else if let object = json as? [Any] {
+                    for item in object as! [Dictionary<String, AnyObject>] {
+                        let id = item["id"] as! Int32
+                        let orderDate = item["orderDate"] as! String
+                        let isShipped = item["isShipped"] as! Bool
+                        let productsIds = item["productsIds"] as! [Int32]
+                        let summaryPrice = item["summaryPrice"] as! Double
+                        
+                        if !checkIfExists(model: "Order", field: "id", fieldValue: item["orderDate"] as! String) {
+                            let order = NSManagedObject(entity: orderEntity!, insertInto: context)
+                            order.setValue(id, forKey: "id")
+                            order.setValue(orderDate, forKey: "orderDate")
+                            order.setValue(isShipped, forKey: "isShipped")
+                            order.setValue(productsIds, forKey: "productsIds")
+                            order.setValue(summaryPrice, forKey: "summaryPrice")
+                            print("Added order: products:\(productsIds), price:\(summaryPrice)")
+                        } else {
+                            print("Order: products:\(productsIds), price:\(summaryPrice) is already in DB")
+                        }
+                    }
+                    try context.save()
+                    dispathGroup.leave()
+                } else {
+                    print("Error with JSON")
+                }
+            } catch {
+                print("error receiving response for Products")
+                dispathGroup.leave()
+                return
+            }
+        })
+        dispathGroup.enter()
+        task.resume()
+        dispathGroup.wait()
+    }
+    
     func checkIfExists(model: String, field: String, fieldValue: String) -> Bool {
             let context = persistenceController.container.viewContext
             
@@ -160,7 +227,7 @@ extension zad04_networkApp {
                 print("Error in checkIfExist")
             }
             return false
-        }
+    }
     
     
 }

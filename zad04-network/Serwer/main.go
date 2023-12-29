@@ -17,6 +17,9 @@ func main() {
 	e.GET("/categories", categoryController.GetCategories)
 	e.GET("/category/:id", categoryController.GetCategoryById)
 
+	orderController := controllers.OrderController{}
+	e.GET("/orders", orderController.GetOrders)
+
 	err := e.Start(":8080")
 	if err != nil {
 		return
