@@ -10,7 +10,7 @@ type Product struct {
 	ID         int     `json:"id"`
 	Name       string  `json:"name"`
 	CategoryId int     `json:"categoryId"`
-	Price      float32 `json:"price"`
+	Price      float64 `json:"price"`
 }
 
 var products = []Product{

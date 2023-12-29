@@ -8,7 +8,7 @@
 import SwiftUI
 import CoreData
 
-let basicServerUrl = "https://0dcd-2a01-11af-43e-7300-ed30-face-2c34-6331.ngrok-free.app"
+let basicServerUrl = "https://a119-83-28-163-66.ngrok-free.app"
 
 @main
 struct zad04_networkApp: App {
@@ -120,12 +120,14 @@ extension zad04_networkApp {
                         let id = item["id"] as! Int32
                         let name = item["name"] as! String
                         let categoryId = item["categoryId"] as! Int32
+                        let price = item["price"] as! Double
                         
                         if !checkIfExists(model: "Product", field: "name", fieldValue: item["name"] as! String) {
                             let product = NSManagedObject(entity: productEntity!, insertInto: context)
                             product.setValue(id, forKey: "id")
                             product.setValue(name, forKey: "name")
                             product.setValue(categoryId, forKey: "categoryId")
+                            product.setValue(price, forKey: "price")
                             print("Added product: name:\(name), id:\(id), categoryId: \(categoryId)")
                         } else {
                             print("Product: name:\(name), id: \(id), categoryId: \(categoryId) is already in DB")
@@ -183,7 +185,7 @@ extension zad04_networkApp {
                         let productsIds = item["productsIds"] as! [Int32]
                         let summaryPrice = item["summaryPrice"] as! Double
                         
-                        if !checkIfExists(model: "Order", field: "id", fieldValue: item["orderDate"] as! String) {
+                        if !checkIfExists(model: "Order", field: "orderDate", fieldValue: item["orderDate"] as! String) {
                             let order = NSManagedObject(entity: orderEntity!, insertInto: context)
                             order.setValue(id, forKey: "id")
                             order.setValue(orderDate, forKey: "orderDate")

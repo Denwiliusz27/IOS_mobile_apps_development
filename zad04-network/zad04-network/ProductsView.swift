@@ -12,14 +12,18 @@ struct ProductsView: View {
     @Environment(\.managedObjectContext) private var viewContext
         
     var categoryId: Int32
+    var categoryName: String
     
     @FetchRequest(
-            sortDescriptors: [],
-            animation: .default)
+        sortDescriptors: [],
+        animation: .default)
     private var products: FetchedResults<Product>
+    
         
-    init(categoryId: Int32) {
+    init(categoryId: Int32, categoryName: String) {
         self.categoryId = categoryId
+        self.categoryName = categoryName
+        
         _products = FetchRequest<Product>(
             sortDescriptors: [],
             predicate: NSPredicate(format: "categoryId == %@", argumentArray: [categoryId]),
@@ -27,11 +31,19 @@ struct ProductsView: View {
     }
         
     var body: some View {
-        List {
-            ForEach(products) { product in
-                Text(product.name ?? "Unknown")
+        VStack {
+            Text("Category: \(categoryName)")
+                .font(.title)
+                .padding()
+            List {
+                ForEach(products) { product in
+                    HStack{
+                        Text(product.name!)
+                        Spacer()
+                        Text(String(product.price))
+                    }
+                }
             }
         }
-        Text("Category: \(categoryId)")
     }
 }

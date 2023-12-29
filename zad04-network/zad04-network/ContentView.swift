@@ -18,16 +18,29 @@ struct ContentView: View {
 
     var body: some View {
         NavigationView {
-            List {
-                ForEach(categories) { category in
-                    NavigationLink {
-                        ProductsView(categoryId: category.id)
-                    } label: {
-                        Text(category.name!)
+            VStack {
+                Text("Categories")
+                    .font(.title)
+                    .padding()
+                
+                List {
+                    ForEach(categories) { category in
+                        NavigationLink {
+                            ProductsView(categoryId: category.id, categoryName: category.name!)
+                        } label: {
+                            Text(category.name!)
+                        }
                     }
                 }
+                
+                NavigationLink(destination: OrdersView()) {
+                    Text("Orders")
+                        .padding()
+                        .background(Color.blue)
+                        .foregroundColor(.white)
+                        .cornerRadius(10)
+                }
             }
-            Text("Categories")
         }
     }
 }

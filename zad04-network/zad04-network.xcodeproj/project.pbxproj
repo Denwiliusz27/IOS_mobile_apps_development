@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		350C7BE12B3F4E6C00B75BFC /* OrdersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 350C7BE02B3F4E6C00B75BFC /* OrdersView.swift */; };
 		35160AA62B3448760082069E /* ProductsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35160AA52B3448760082069E /* ProductsView.swift */; };
 		359D781D2B2B1E6700ABBE4D /* zad04_networkApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 359D781C2B2B1E6700ABBE4D /* zad04_networkApp.swift */; };
 		359D781F2B2B1E6700ABBE4D /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 359D781E2B2B1E6700ABBE4D /* ContentView.swift */; };
@@ -17,6 +18,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		350C7BE02B3F4E6C00B75BFC /* OrdersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrdersView.swift; sourceTree = "<group>"; };
 		35160AA52B3448760082069E /* ProductsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductsView.swift; sourceTree = "<group>"; };
 		359D78192B2B1E6700ABBE4D /* zad04-network.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "zad04-network.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		359D781C2B2B1E6700ABBE4D /* zad04_networkApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = zad04_networkApp.swift; sourceTree = "<group>"; };
@@ -64,6 +66,7 @@
 				359D78252B2B1E6800ABBE4D /* Persistence.swift */,
 				359D78272B2B1E6800ABBE4D /* zad04_network.xcdatamodeld */,
 				359D78222B2B1E6800ABBE4D /* Preview Content */,
+				350C7BE02B3F4E6C00B75BFC /* OrdersView.swift */,
 			);
 			path = "zad04-network";
 			sourceTree = "<group>";
@@ -151,6 +154,7 @@
 				359D78292B2B1E6800ABBE4D /* zad04_network.xcdatamodeld in Sources */,
 				359D781D2B2B1E6700ABBE4D /* zad04_networkApp.swift in Sources */,
 				35160AA62B3448760082069E /* ProductsView.swift in Sources */,
+				350C7BE12B3F4E6C00B75BFC /* OrdersView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
