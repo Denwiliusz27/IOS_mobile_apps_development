@@ -9,7 +9,7 @@ func main() {
 	e := echo.New()
 
 	userController := controllers.UserController{}
-	e.GET("/login", userController.Login)
+	e.POST("/login", userController.Login)
 	e.POST("/register", userController.Register)
 
 	err := e.Start(":8080")

@@ -13,6 +13,8 @@
 		351046482B475CF8001DC8B0 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 351046472B475CF8001DC8B0 /* Preview Assets.xcassets */; };
 		3510464F2B475D7C001DC8B0 /* loginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3510464E2B475D7C001DC8B0 /* loginView.swift */; };
 		351046512B475F41001DC8B0 /* RegisterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 351046502B475F41001DC8B0 /* RegisterView.swift */; };
+		351046532B497C67001DC8B0 /* UserPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 351046522B497C67001DC8B0 /* UserPageView.swift */; };
+		351046552B49862E001DC8B0 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 351046542B49862E001DC8B0 /* User.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -23,6 +25,8 @@
 		351046472B475CF8001DC8B0 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		3510464E2B475D7C001DC8B0 /* loginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = loginView.swift; sourceTree = "<group>"; };
 		351046502B475F41001DC8B0 /* RegisterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterView.swift; sourceTree = "<group>"; };
+		351046522B497C67001DC8B0 /* UserPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPageView.swift; sourceTree = "<group>"; };
+		351046542B49862E001DC8B0 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,6 +65,8 @@
 				351046462B475CF8001DC8B0 /* Preview Content */,
 				3510464E2B475D7C001DC8B0 /* loginView.swift */,
 				351046502B475F41001DC8B0 /* RegisterView.swift */,
+				351046522B497C67001DC8B0 /* UserPageView.swift */,
+				351046542B49862E001DC8B0 /* User.swift */,
 			);
 			path = "zad05-OAuth";
 			sourceTree = "<group>";
@@ -145,6 +151,8 @@
 			files = (
 				351046432B475CF7001DC8B0 /* ContentView.swift in Sources */,
 				351046512B475F41001DC8B0 /* RegisterView.swift in Sources */,
+				351046552B49862E001DC8B0 /* User.swift in Sources */,
+				351046532B497C67001DC8B0 /* UserPageView.swift in Sources */,
 				3510464F2B475D7C001DC8B0 /* loginView.swift in Sources */,
 				351046412B475CF7001DC8B0 /* zad05_OAuthApp.swift in Sources */,
 			);

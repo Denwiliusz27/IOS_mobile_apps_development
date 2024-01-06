@@ -26,6 +26,11 @@ type UserRegister struct {
 	Password string `json:"password"`
 }
 
+type ReturnUser struct {
+	Name string `json:"name"`
+	Age  int    `json:"age"`
+}
+
 var users = []User{
 	{ID: 1, Name: "Adam", Age: 22, Login: "adam@gmail.com", Password: "adam123"},
 	{ID: 2, Name: "John", Age: 45, Login: "johnny@op.pl", Password: "Jhn1"},
@@ -47,7 +52,11 @@ func (uc *UserController) Login(c echo.Context) error {
 	for _, temp := range users {
 		if temp.Login == user.Login {
 			if temp.Password == user.Password {
-				return c.JSON(http.StatusOK, temp)
+				returnUser := ReturnUser{
+					Name: temp.Name,
+					Age:  temp.Age,
+				}
+				return c.JSON(http.StatusOK, returnUser)
 			}
 			fmt.Printf("Inappropriate password\n")
 			return c.JSON(http.StatusConflict, nil)
@@ -75,6 +84,11 @@ func (uc *UserController) Register(c echo.Context) error {
 
 	users = append(users, newUser)
 
+	returnUser := ReturnUser{
+		Name: newUser.Name,
+		Age:  newUser.Age,
+	}
+
 	fmt.Printf("User created succesfully\n")
-	return c.JSON(http.StatusOK, newUser)
+	return c.JSON(http.StatusOK, returnUser)
 }
