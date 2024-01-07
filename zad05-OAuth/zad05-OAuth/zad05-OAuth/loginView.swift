@@ -12,8 +12,8 @@ struct LoginView: View {
     @State private var password: String = ""
     @State private var responseError: Bool = false
     @State private var errorMessage: String = ""
-    @State private var loginError: Bool = true
-    @State private var passwordError: Bool = true
+    @State private var loginError: Bool = false
+    @State private var passwordError: Bool = false
     @State private var buttonClicked: Bool = false
     @State private var navigateToUserPage: Bool = false
     @State private var user: User = User(name: "", age: 0, city: "")
@@ -41,7 +41,8 @@ struct LoginView: View {
                     )
                     .padding(.vertical, 10)
                     .alert(isPresented: $loginError){
-                        Alert(title: Text("ERROR"), message: Text("Fill login"), dismissButton: .default(Text("OK")))
+                        print("login alert is on da way")
+                        return Alert(title: Text("ERROR"), message: Text("Fill login"), dismissButton: .default(Text("OK")))
                     }
                     .onDisappear{
                         loginError = false
@@ -61,7 +62,8 @@ struct LoginView: View {
                     )
                     .padding(.vertical, 10)
                     .alert(isPresented: $passwordError){
-                        Alert(title: Text("ERROR"), message: Text("Fill password"), dismissButton: .default(Text("OK")))
+                        print("register alert is on da way")
+                        return Alert(title: Text("ERROR"), message: Text("Fill password"), dismissButton: .default(Text("OK")))
                     }
                     .onDisappear{
                         passwordError = false
@@ -77,33 +79,30 @@ struct LoginView: View {
                 })
                 .background(Color(.systemBlue))
                 .cornerRadius(15)
+                .alert(isPresented: $responseError){
+                    Alert(title: Text("ERROR"), message: Text(errorMessage), dismissButton: .default(Text("OK")))
+                }
+                .onDisappear{
+                    errorMessage = ""
+                    responseError = false
+                }
                 
                 NavigationLink(destination: UserPageView(user: self.user), isActive: $navigateToUserPage){
                     EmptyView()
                 }
             }
-            .alert(isPresented: $responseError){
-                Alert(title: Text("ERROR"), message: Text(errorMessage), dismissButton: .default(Text("OK")))
-            }
-            .onDisappear{
-                errorMessage = ""
-                responseError = false
-            }
+            
         }
     }
     
     func signIn() {
-        print("password: '\(password)', login: '\(login)'")
+        if login == "" {
+            loginError = true
+            return
+        }
         
         if password == "" {
             passwordError = true
-            print("empty password")
-            return
-        }
-
-        if login == "" {
-            loginError = true
-            print("empty login")
             return
         }
         

@@ -155,17 +155,17 @@ struct RegisterView: View {
                 })
                 .background(Color(.systemBlue))
                 .cornerRadius(15)
+                .alert(isPresented: $responseError){
+                    Alert(title: Text("ERROR"), message: Text(errorMessage), dismissButton: .default(Text("OK")))
+                }
+                .onDisappear{
+                    errorMessage = ""
+                    responseError = false
+                }
                 
                 NavigationLink(destination: UserPageView(user: self.user), isActive: $navigateToUserPage){
                     EmptyView()
                 }
-            }
-            .alert(isPresented: $responseError){
-                Alert(title: Text("ERROR"), message: Text(errorMessage), dismissButton: .default(Text("OK")))
-            }
-            .onDisappear{
-                errorMessage = ""
-                responseError = false
             }
         }
     }
