@@ -17,7 +17,7 @@ struct LoginView: View {
     @State private var buttonClicked: Bool = false
     @State private var navigateToUserPage: Bool = false
     @State private var user: User = User(name: "", age: 0, city: "")
-    private var baseServerUrl = "https://9462-2a02-a31a-e045-4880-4979-db36-7b01-4532.ngrok-free.app"
+    private var baseServerUrl = "https://3c15-2a00-f41-58d0-a08b-f4ef-21bb-7392-e4d7.ngrok-free.app"
     
     var body: some View{
         NavigationView{
@@ -27,19 +27,7 @@ struct LoginView: View {
                     .padding()
                     .foregroundColor(.blue)
                 
-                TextField("Login", text: $login)
-                    .frame(width: 260, height: 60, alignment: .center)
-                    .padding(.horizontal, 20)
-                    .background(Color.white)
-                    .foregroundColor(.blue)
-                    .cornerRadius(15)
-                    .fontWeight(.bold)
-                    .font(.system(size: 20))
-                    .overlay(
-                        RoundedRectangle(cornerRadius: 15)
-                            .stroke(Color.blue, lineWidth: 3)
-                    )
-                    .padding(.vertical, 10)
+                TextInput(inputName: "Login", value: $login)
                     .alert(isPresented: $loginError){
                         print("login alert is on da way")
                         return Alert(title: Text("ERROR"), message: Text("Fill login"), dismissButton: .default(Text("OK")))
@@ -145,6 +133,7 @@ struct LoginView: View {
                 let user = try JSONDecoder().decode(User.self, from: data)
                 self.user.name = user.name
                 self.user.age = user.age
+                self.user.city = user.city
                 self.navigateToUserPage = true
                 
             } catch {

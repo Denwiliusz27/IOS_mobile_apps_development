@@ -14,6 +14,6 @@ struct UserPageView: View {
     var body: some View{
         Text("Hello \(user.name)!")
         Text("Age: \(user.age)")
-//        Text("City: \(user.city)")
+        Text("City: \(user.city)")
     }
 }
