@@ -10,6 +10,7 @@ type User struct {
 	ID       int    `json:"id"`
 	Name     string `json:"name"`
 	Age      int    `json:"age"`
+	City     string `json:"city"`
 	Login    string `json:"login"`
 	Password string `json:"password"`
 }
@@ -22,6 +23,7 @@ type UserLogin struct {
 type UserRegister struct {
 	Name     string `json:"name"`
 	Age      int    `json:"age"`
+	City     string `json:"city"`
 	Login    string `json:"login"`
 	Password string `json:"password"`
 }
@@ -29,12 +31,13 @@ type UserRegister struct {
 type ReturnUser struct {
 	Name string `json:"name"`
 	Age  int    `json:"age"`
+	City string `json:"city"`
 }
 
 var users = []User{
-	{ID: 1, Name: "Adam", Age: 22, Login: "adam@gmail.com", Password: "adam123"},
-	{ID: 2, Name: "John", Age: 45, Login: "johnny@op.pl", Password: "Jhn1"},
-	{ID: 3, Name: "Kazimierz", Age: 22, Login: "kaziukozaczek@gmail.com", Password: "takikozaczekjakkazek123"},
+	{ID: 1, Name: "Adam", Age: 22, City: "Warszawa", Login: "adam@gmail.com", Password: "adam123"},
+	{ID: 2, Name: "John", Age: 45, City: "Gdynia", Login: "johnny@op.pl", Password: "Jhn1"},
+	{ID: 3, Name: "Kazimierz", Age: 22, City: "Krosno", Login: "kaziukozaczek@gmail.com", Password: "takikozaczekjakkazek123"},
 }
 
 type UserController struct{}
@@ -55,6 +58,7 @@ func (uc *UserController) Login(c echo.Context) error {
 				returnUser := ReturnUser{
 					Name: temp.Name,
 					Age:  temp.Age,
+					City: temp.City,
 				}
 				return c.JSON(http.StatusOK, returnUser)
 			}
@@ -74,10 +78,17 @@ func (uc *UserController) Register(c echo.Context) error {
 		return c.JSON(http.StatusBadRequest, nil)
 	}
 
+	for _, temp := range users {
+		if temp.Login == user.Login {
+			return c.JSON(http.StatusConflict, nil)
+		}
+	}
+
 	newUser := User{
 		ID:       len(users) + 1,
 		Name:     user.Name,
 		Age:      user.Age,
+		City:     user.City,
 		Login:    user.Login,
 		Password: user.Password,
 	}
@@ -87,6 +98,7 @@ func (uc *UserController) Register(c echo.Context) error {
 	returnUser := ReturnUser{
 		Name: newUser.Name,
 		Age:  newUser.Age,
+		City: newUser.City,
 	}
 
 	fmt.Printf("User created succesfully\n")

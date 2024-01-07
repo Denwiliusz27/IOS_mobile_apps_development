@@ -12,12 +12,12 @@ struct LoginView: View {
     @State private var password: String = ""
     @State private var responseError: Bool = false
     @State private var errorMessage: String = ""
-    @State private var loginError: Bool = false
-    @State private var passwordError: Bool = false
+    @State private var loginError: Bool = true
+    @State private var passwordError: Bool = true
     @State private var buttonClicked: Bool = false
     @State private var navigateToUserPage: Bool = false
-    @State private var user: User = User(name: "", age: 0)
-    private var baseServerUrl = "https://8281-2a02-a31a-e045-4880-b806-3fba-8bae-6515.ngrok-free.app"
+    @State private var user: User = User(name: "", age: 0, city: "")
+    private var baseServerUrl = "https://9462-2a02-a31a-e045-4880-4979-db36-7b01-4532.ngrok-free.app"
     
     var body: some View{
         NavigationView{
@@ -28,7 +28,8 @@ struct LoginView: View {
                     .foregroundColor(.blue)
                 
                 TextField("Login", text: $login)
-                    .frame(width: 300, height: 60, alignment: .center)
+                    .frame(width: 260, height: 60, alignment: .center)
+                    .padding(.horizontal, 20)
                     .background(Color.white)
                     .foregroundColor(.blue)
                     .cornerRadius(15)
@@ -47,7 +48,8 @@ struct LoginView: View {
                     }
                 
                 SecureField("Password", text: $password)
-                    .frame(width: 300, height: 60, alignment: .center)
+                    .frame(width: 260, height: 60, alignment: .center)
+                    .padding(.horizontal, 20)
                     .background(Color.white)
                     .foregroundColor(.blue)
                     .cornerRadius(15)
@@ -91,13 +93,17 @@ struct LoginView: View {
     }
     
     func signIn() {
-        if password == ""{
+        print("password: '\(password)', login: '\(login)'")
+        
+        if password == "" {
             passwordError = true
+            print("empty password")
             return
         }
 
         if login == "" {
             loginError = true
+            print("empty login")
             return
         }
         
@@ -125,12 +131,15 @@ struct LoginView: View {
             if httpResponse.statusCode == 400 {
                 self.errorMessage = "Error with server"
                 self.responseError = true
+                return
             } else if  httpResponse.statusCode == 404 {
                 self.errorMessage = "User not found"
                 self.responseError = true
+                return
             } else if httpResponse.statusCode == 409 {
                 self.errorMessage = "Inappropriate password"
                 self.responseError = true
+                return
             }
             
             do {

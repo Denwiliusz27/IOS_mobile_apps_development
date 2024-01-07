@@ -10,9 +10,11 @@ import Foundation
 class User: Codable {
     var name: String
     var age: Int
+    var city: String
     
-    init(name: String, age: Int) {
+    init(name: String, age: Int, city: String) {
         self.name = name
         self.age = age
+        self.city = city
     }
 }

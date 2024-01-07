@@ -15,6 +15,7 @@
 		351046512B475F41001DC8B0 /* RegisterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 351046502B475F41001DC8B0 /* RegisterView.swift */; };
 		351046532B497C67001DC8B0 /* UserPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 351046522B497C67001DC8B0 /* UserPageView.swift */; };
 		351046552B49862E001DC8B0 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 351046542B49862E001DC8B0 /* User.swift */; };
+		351046572B4AB884001DC8B0 /* TextInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 351046562B4AB884001DC8B0 /* TextInput.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -27,6 +28,7 @@
 		351046502B475F41001DC8B0 /* RegisterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterView.swift; sourceTree = "<group>"; };
 		351046522B497C67001DC8B0 /* UserPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPageView.swift; sourceTree = "<group>"; };
 		351046542B49862E001DC8B0 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		351046562B4AB884001DC8B0 /* TextInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextInput.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -67,6 +69,7 @@
 				351046502B475F41001DC8B0 /* RegisterView.swift */,
 				351046522B497C67001DC8B0 /* UserPageView.swift */,
 				351046542B49862E001DC8B0 /* User.swift */,
+				351046562B4AB884001DC8B0 /* TextInput.swift */,
 			);
 			path = "zad05-OAuth";
 			sourceTree = "<group>";
@@ -155,6 +158,7 @@
 				351046532B497C67001DC8B0 /* UserPageView.swift in Sources */,
 				3510464F2B475D7C001DC8B0 /* loginView.swift in Sources */,
 				351046412B475CF7001DC8B0 /* zad05_OAuthApp.swift in Sources */,
+				351046572B4AB884001DC8B0 /* TextInput.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
