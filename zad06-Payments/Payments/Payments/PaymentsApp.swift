@@ -27,9 +27,6 @@ struct PaymentsApp: App {
 extension PaymentsApp {
     func loadData() {
         let context = persistenceController.container.viewContext
-        
-        
-        
                 if !isDataLoaded(){
                     let electronicsCategory = Category(context: context)
                     electronicsCategory.name = "Electronics"

@@ -8,9 +8,8 @@ import (
 func main() {
 	e := echo.New()
 
-	userController := controllers.UserController{}
-	e.POST("/login", userController.Login)
-	e.POST("/register", userController.Register)
+	paymentController := controllers.PaymentController{}
+	e.POST("/pay", paymentController.Pay)
 
 	err := e.Start(":8080")
 	if err != nil {

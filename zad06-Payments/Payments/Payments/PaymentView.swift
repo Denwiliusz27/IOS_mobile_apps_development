@@ -15,12 +15,15 @@ struct PaymentView: View {
     @State private var responseError: Bool = false
     @State private var errorMessage: String = ""
     @State private var navigateToConfirmPage: Bool = false
-    private var baseServerUrl = "test"
+    private var baseServerUrl = "https://c627-2a02-a31a-e045-4880-50dd-8f2c-bf2-1423.ngrok-free.app"
     
     let product: Product
+    let persistenceController = PersistenceController.shared
     
     init(product: Product) { // Dostosuj dostęp do inicjalizatora
             self.product = product
+            self.cardNr = ""
+            self.ccv = ""
         }
     
     var body: some View {
@@ -117,11 +120,10 @@ struct PaymentView: View {
                             responseError = false
                         }
                         
-                        NavigationLink(destination: ConfirmPage(product: product), isActive: $navigateToConfirmPage){
+                        NavigationLink(destination: ConfirmView(product: product), isActive: $navigateToConfirmPage){
                             EmptyView()
                         }
                     }
-                    
                 }
             }
             
@@ -138,13 +140,13 @@ struct PaymentView: View {
                 
                 // create JSON data
                 let cardData: [String: Any] = [
-                    "number": cardNr,
+                    "cardNr": cardNr,
                     "ccv": ccv,
                     "product": product.name!
                 ]
                         
                 // create request
-                var request = URLRequest(url: URL(string: "\(baseServerUrl)/buy")!)
+                var request = URLRequest(url: URL(string: "\(baseServerUrl)/pay")!)
                 request.httpMethod = "POST"
                 request.httpBody = try? JSONSerialization.data(withJSONObject: cardData)
                 request.setValue("application/json", forHTTPHeaderField: "Content-Type")
@@ -172,16 +174,13 @@ struct PaymentView: View {
                         return
                     }
                     
-//                    do {
-//                        let user = try JSONDecoder().decode(User.self, from: data)
-//                        self.user.name = user.name
-//                        self.user.age = user.age
-//                        self.user.city = user.city
                     self.navigateToConfirmPage = true
-//
-//                    } catch {
-//                        print(error)
-//                    }
+
+                    let context = persistenceController.container.viewContext
+                    let newBought = Bought(context: context)
+                    newBought.date = Date()
+                    newBought.product = product
+                    
                 }
                 task.resume()
             }

@@ -10,7 +10,9 @@ import CoreData
 
 struct ContentView: View {
     @Environment(\.managedObjectContext) private var viewContext
-
+    @State private var navigationLinkActive = false
+    
+    
         @FetchRequest(
             sortDescriptors: [NSSortDescriptor(keyPath: \Product.name, ascending: true)],
             animation: .default)
@@ -18,22 +20,41 @@ struct ContentView: View {
 
         var body: some View {
             NavigationView {
-                List {
-                    ForEach(products) { product in
-                        NavigationLink {
-                            ProductView(product: product)
-                        } label: {
-                            HStack{
-                                Text(product.name!)
-                                Spacer()
-                                Text((product.category?.name)!)
+                VStack{
+                    List {
+                        ForEach(products) { product in
+                            NavigationLink {
+                                ProductView(product: product)
+                            } label: {
+                                HStack{
+                                    Text(product.name!)
+                                    Spacer()
+                                    Text((product.category?.name)!)
+                                }
                             }
                         }
                     }
+                    .navigationTitle("Products")
+                    
+                    Button(action: {
+                                        // Dodaj akcję przycisku, która przenosi Cię do ConfirmView
+                                        // Na przykład:
+                                         navigationLinkActive = true
+                                    }) {
+                                        Text("Go to ConfirmView")
+                                            .padding()
+                                            .background(Color.blue)
+                                            .foregroundColor(.white)
+                                            .cornerRadius(10)
+                                    }
+                                    // NavigationLink, który jest aktywowany po naciśnięciu przycisku
+                                    NavigationLink(
+                                        destination: ConfirmPage(),
+                                        isActive: $navigationLinkActive,
+                                        label: { EmptyView() }
+                                    )
+                    
                 }
-               
-                Text("Shopping list")
-                    .fontWeight(.bold)
             }
         }
 

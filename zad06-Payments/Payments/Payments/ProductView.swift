@@ -19,7 +19,7 @@ struct ProductView: View {
             HStack {
                 Text("Price: ")
                     .fontWeight(.bold)
-                Text(String(format: "%.2f", product.price))  //"\(product.price)")
+                Text(String(format: "%.2f", product.price))  
             }
             HStack {
                 Text("Details: ")
