@@ -22,7 +22,7 @@ struct AlarmView: View {
     @State private var errorMessage: String = ""
     @State var availableDays: [String] = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
     @State var alarmList: [Alarm] = [
-        Alarm( day: "Monday", hour: 6, minute: 55),
+        Alarm(day: "Monday", hour: 6, minute: 55),
     ]
     
     var body: some View{
@@ -30,7 +30,7 @@ struct AlarmView: View {
             Text("Alarms")
                 .font(.title)
                 .fontWeight(.bold)
-                .padding(15)
+                .padding(10)
                 .foregroundColor(.blue)
             
             VStack{
@@ -125,7 +125,7 @@ struct AlarmView: View {
                         .background(.white)
                         .cornerRadius(10)
                         .background(RoundedRectangle(cornerRadius: 10).foregroundColor(.blue))
-                        .padding(.horizontal, 20)
+                        .padding(.horizontal, 10)
                 }
                 .alert(isPresented: $error) {
                     Alert(title: Text("ERROR"), message: Text(errorMessage), dismissButton: .default(Text("OK")))
@@ -134,8 +134,8 @@ struct AlarmView: View {
                 
             }
             .frame(width: 260, alignment: .center)
-            .padding(.horizontal, 20)
-            .padding(.vertical, 20)
+            .padding(.horizontal, 10)
+            .padding(.vertical, 10)
             .background(Color.blue)
             .cornerRadius(15)
             .fontWeight(.bold)
@@ -153,11 +153,15 @@ struct AlarmView: View {
                         Text(alarm.day)
                             .font(.title)
                             .fontWeight(.bold)
+                            .foregroundColor(.blue)
+                            .padding(.vertical, 5)
+                            .padding(.horizontal, 20)
                         Spacer()
-                        Text("\(alarm.hour) : \(alarm.minute)")
+                        Text("\(alarm.hour):\(alarm.minute)")
                             .fontWeight(.bold)
+                            .padding(10)
+                            .font(.system(size:22))
                     }
-                    
                 }
             }
             .navigationTitle("Actual alarms")
@@ -165,26 +169,54 @@ struct AlarmView: View {
     }
     
     func addHour() {
-        if self.hour != "" {
-            self.hour = String((Int(self.hour) ?? 0) + 1)
+        if self.hour != "" && self.hour.isInt {
+            if self.hour == "23" {
+                self.hour = "0"
+            } else {
+                self.hour = String((Int(self.hour)!) + 1)
+            }
+        } else {
+            self.error = true
+            self.errorMessage = "Hour should be number between 0 and 23"
         }
     }
     
     func substractHour() {
-        if self.hour != "" {
-            self.hour = String((Int(self.hour) ?? 0) - 1)
+        if self.hour != "" && self.hour.isInt {
+            if self.hour == "0" {
+                self.hour = "23"
+            } else {
+                self.hour = String((Int(self.hour)!) - 1)
+            }
+        } else {
+            self.error = true
+            self.errorMessage = "Hour should be number between 0 and 23"
         }
     }
     
     func addMinute() {
-        if self.minute != "" {
-            self.minute = String((Int(self.minute) ?? 0) + 1)
+        if self.minute != "" && self.minute.isInt {
+            if self.minute == "59" {
+                self.minute = "0"
+            } else {
+                self.minute = String((Int(self.minute)!) + 1)
+            }
+        } else {
+            self.error = true
+            self.errorMessage = "Minute should be number between 0 and 23"
         }
     }
     
     func substractMinute() {
-        if self.minute != "" {
-            self.minute = String((Int(self.minute) ?? 0) - 1)
+        if self.minute != "" && self.minute.isInt {
+            if self.minute == "0" {
+                self.minute = "59"
+            } else {
+                self.minute = String((Int(self.minute)!) - 1)
+            }
+        } else {
+            self.error = true
+            self.errorMessage = "Minute should be number between 0 and 59"
         }
     }
     
@@ -192,31 +224,42 @@ struct AlarmView: View {
         if !availableDays.contains(self.day){
             self.error = true
             self.errorMessage = "Inapropriate day name"
+            return
         }
         
         if self.day == "" {
             self.error = true
             self.errorMessage = "Fill day input"
+            return
+        }
+        
+        for alarm in alarmList {
+            if String(alarm.day) == self.day && String(alarm.hour) == self.hour && String(alarm.minute) == self.minute {
+                self.error = true
+                self.errorMessage = "Alarm for this day and time already exist"
+                return
+            }
         }
         
         if self.hour == "0" || self.minute == "0" {
             self.error = true
             self.errorMessage = "Fill hour and minute"
+            return
         }
         
         if Int(self.hour) ?? 0 > 23 || Int(self.hour) ?? 0 < 0 || !self.hour.isInt{
             self.error = true
             self.errorMessage = "Hour should be number between 0 and 23"
+            return
         }
         
         if Int(self.minute) ?? 0 > 59 || Int(self.minute) ?? 0 < 0 || !self.minute.isInt{
             self.error = true
             self.errorMessage = "Minute should be number between 0 and 23"
+            return
         }
         
-        
         let newAlarm = Alarm(day: self.day, hour: Int(self.hour) ?? 0, minute: Int(self.minute) ?? 0)
-        
         
         print(newAlarm)
         alarmList.append(newAlarm)

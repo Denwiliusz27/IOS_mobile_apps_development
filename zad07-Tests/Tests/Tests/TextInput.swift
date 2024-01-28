@@ -13,8 +13,8 @@ struct TextInput: View {
     
     var body: some View {
         TextField("\(inputName)", text: $value)
-            .frame(width: 200, height: 60, alignment: .center)
-            .padding(.horizontal, 20)
+            .frame(width: 200, height: 50, alignment: .center)
+            .padding(.horizontal, 15)
             .background(Color.white)
             .foregroundColor(.blue)
             .cornerRadius(15)
@@ -24,7 +24,7 @@ struct TextInput: View {
                 RoundedRectangle(cornerRadius: 15)
                     .stroke(Color.blue, lineWidth: 3)
             )
-            .padding(.vertical, 5)
+            .padding(.vertical, 3)
     }
 }
 

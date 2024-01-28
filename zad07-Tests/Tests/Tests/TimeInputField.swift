@@ -13,12 +13,12 @@ struct TimeInputField: View {
     
     var body: some View {
         TextField("\(inputName)", text: $value)
-            .frame(width: 70, height: 60, alignment: .center)
+            .frame(width: 70, height: 50, alignment: .center)
             .background(Color.white)
             .cornerRadius(15)
             .fontWeight(.bold)
             .font(.system(size: 20))
-            .padding(.horizontal, 10)
+            .padding(.horizontal, 5)
             .multilineTextAlignment(.center)
     }
 }
