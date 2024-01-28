@@ -203,7 +203,7 @@ struct AlarmView: View {
             }
         } else {
             self.error = true
-            self.errorMessage = "Minute should be number between 0 and 23"
+            self.errorMessage = "Minute should be number between 0 and 59"
         }
     }
     
@@ -221,15 +221,15 @@ struct AlarmView: View {
     }
     
     func addAlarm(){
-        if !availableDays.contains(self.day){
-            self.error = true
-            self.errorMessage = "Inapropriate day name"
-            return
-        }
-        
         if self.day == "" {
             self.error = true
             self.errorMessage = "Fill day input"
+            return
+        }
+        
+        if !availableDays.contains(self.day){
+            self.error = true
+            self.errorMessage = "Inapropriate day name"
             return
         }
         
@@ -241,25 +241,25 @@ struct AlarmView: View {
             }
         }
         
-        if self.hour == "0" || self.minute == "0" {
+        if self.hour == "" || self.minute == "" {
             self.error = true
             self.errorMessage = "Fill hour and minute"
             return
         }
         
-        if Int(self.hour) ?? 0 > 23 || Int(self.hour) ?? 0 < 0 || !self.hour.isInt{
+        if !self.hour.isInt || Int(self.hour)! > 23 || Int(self.hour)! < 0 {
             self.error = true
             self.errorMessage = "Hour should be number between 0 and 23"
             return
         }
         
-        if Int(self.minute) ?? 0 > 59 || Int(self.minute) ?? 0 < 0 || !self.minute.isInt{
+        if !self.minute.isInt || Int(self.minute)! > 59 || Int(self.minute)! < 0 {
             self.error = true
-            self.errorMessage = "Minute should be number between 0 and 23"
+            self.errorMessage = "Minute should be number between 0 and 59"
             return
         }
         
-        let newAlarm = Alarm(day: self.day, hour: Int(self.hour) ?? 0, minute: Int(self.minute) ?? 0)
+        let newAlarm = Alarm(day: self.day, hour: Int(self.hour)!, minute: Int(self.minute)!)
         
         print(newAlarm)
         alarmList.append(newAlarm)
