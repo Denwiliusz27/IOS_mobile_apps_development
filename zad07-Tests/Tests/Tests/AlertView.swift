@@ -7,14 +7,8 @@
 
 import SwiftUI
 
-struct AlarmView: View {
-    struct Alarm: Identifiable {
-        let id = UUID()
-        var day: String
-        var hour: Int
-        var minute: Int
-    }
-    
+struct AlarmView: View {    
+    @State private var alarmFunctions = AlarmFunctions()
     @State private var day: String = ""
     @State private var hour: String = "0"
     @State private var minute: String = "0"
@@ -44,7 +38,7 @@ struct AlarmView: View {
                                     .foregroundColor(.white)
                                 
                                 Button(action: {
-                                    self.addHour()
+                                    (self.error, self.errorMessage, self.hour) = alarmFunctions.addHour(hour: self.hour)
                                 }) {
                                     Image(systemName: "arrow.up")
                                         .imageScale(.small)
@@ -57,7 +51,7 @@ struct AlarmView: View {
                                 TimeInputField(inputName: "Hour", value: $hour)
                                 
                                 Button(action: {
-                                    self.substractHour()
+                                    (self.error, self.errorMessage, self.hour) = alarmFunctions.substractHour(hour: self.hour)
                                 }) {
                                     Image(systemName: "arrow.down")
                                         .imageScale(.small)
@@ -82,7 +76,7 @@ struct AlarmView: View {
                                     .foregroundColor(.white)
                                 
                                 Button(action: {
-                                    self.addMinute()
+                                    (self.error, self.errorMessage, self.minute) = alarmFunctions.addMinute(minute: self.minute)
                                 }) {
                                     Image(systemName: "arrow.up")
                                         .imageScale(.small)
@@ -95,7 +89,7 @@ struct AlarmView: View {
                                 TimeInputField(inputName: "Minute", value: $minute)
                                 
                                 Button(action: {
-                                    self.substractMinute()
+                                    (self.error, self.errorMessage, self.minute) = alarmFunctions.substractMinute(minute: self.minute)
                                 }) {
                                     Image(systemName: "arrow.down")
                                         .imageScale(.small)
@@ -116,7 +110,7 @@ struct AlarmView: View {
                 }
                 
                 Button(action: {
-                    self.addAlarm()
+                    (self.error, alarmList, self.errorMessage) = alarmFunctions.addAlarm(availableDays: availableDays, alarmList: alarmList, day: self.day, hour: self.hour, minute: self.minute)
                 }) {
                     Text("Submit")
                         .padding()
@@ -168,103 +162,7 @@ struct AlarmView: View {
         }
     }
     
-    func addHour() {
-        if self.hour != "" && self.hour.isInt {
-            if self.hour == "23" {
-                self.hour = "0"
-            } else {
-                self.hour = String((Int(self.hour)!) + 1)
-            }
-        } else {
-            self.error = true
-            self.errorMessage = "Hour should be number between 0 and 23"
-        }
-    }
     
-    func substractHour() {
-        if self.hour != "" && self.hour.isInt {
-            if self.hour == "0" {
-                self.hour = "23"
-            } else {
-                self.hour = String((Int(self.hour)!) - 1)
-            }
-        } else {
-            self.error = true
-            self.errorMessage = "Hour should be number between 0 and 23"
-        }
-    }
-    
-    func addMinute() {
-        if self.minute != "" && self.minute.isInt {
-            if self.minute == "59" {
-                self.minute = "0"
-            } else {
-                self.minute = String((Int(self.minute)!) + 1)
-            }
-        } else {
-            self.error = true
-            self.errorMessage = "Minute should be number between 0 and 59"
-        }
-    }
-    
-    func substractMinute() {
-        if self.minute != "" && self.minute.isInt {
-            if self.minute == "0" {
-                self.minute = "59"
-            } else {
-                self.minute = String((Int(self.minute)!) - 1)
-            }
-        } else {
-            self.error = true
-            self.errorMessage = "Minute should be number between 0 and 59"
-        }
-    }
-    
-    func addAlarm(){
-        if self.day == "" {
-            self.error = true
-            self.errorMessage = "Fill day input"
-            return
-        }
-        
-        if !availableDays.contains(self.day){
-            self.error = true
-            self.errorMessage = "Inapropriate day name"
-            return
-        }
-        
-        for alarm in alarmList {
-            if String(alarm.day) == self.day && String(alarm.hour) == self.hour && String(alarm.minute) == self.minute {
-                self.error = true
-                self.errorMessage = "Alarm for this day and time already exist"
-                return
-            }
-        }
-        
-        if self.hour == "" || self.minute == "" {
-            self.error = true
-            self.errorMessage = "Fill hour and minute"
-            return
-        }
-        
-        if !self.hour.isInt || Int(self.hour)! > 23 || Int(self.hour)! < 0 {
-            self.error = true
-            self.errorMessage = "Hour should be number between 0 and 23"
-            return
-        }
-        
-        if !self.minute.isInt || Int(self.minute)! > 59 || Int(self.minute)! < 0 {
-            self.error = true
-            self.errorMessage = "Minute should be number between 0 and 59"
-            return
-        }
-        
-        let newAlarm = Alarm(day: self.day, hour: Int(self.hour)!, minute: Int(self.minute)!)
-        
-        print(newAlarm)
-        alarmList.append(newAlarm)
-        print(alarmList)
-    }
     
 }
 
